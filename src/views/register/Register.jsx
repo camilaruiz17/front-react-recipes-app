@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../register/Register.css";
 import Swal from "sweetalert2";
+import { registerUser } from "../../services/register.service"
 
 const Register = () => {
 
