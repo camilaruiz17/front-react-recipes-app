@@ -1,0 +1,1 @@
+import "../details-recipes/Details-recipes.css";

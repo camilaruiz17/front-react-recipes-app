@@ -1,0 +1,10 @@
+.CardCook{
+margin: 0;
+margin: auto;
+margin-top: 8px;
+margin-bottom: 10px;
+}
+
+.MuiCardHeader-content:nth-child(odd) {
+    font-weight: bold;
+}
