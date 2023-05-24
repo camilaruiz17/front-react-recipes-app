@@ -7,6 +7,7 @@ import Search from "../views/search/Search";
 import Login from "../views/login/Login";
 import NavBars from "../components/nav-bar/NavBar";
 import Register from "../views/register/Register";
+import PerfilViews from "../components/profile-user/Profile-user";
 
 
 const Router = () => {
@@ -19,7 +20,7 @@ const Router = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home  />} />
             <Route path="/details" element={<DetailsViews/>} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<PerfilViews />} />
             <Route path="/search/:busqueda" element={<Search />} />
             <Route path="/register" element={<Register />} />
         </Routes>

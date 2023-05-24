@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../register/Register.css";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/register.service"
 
 const Register = () => {
+    
+    const navigate = useNavigate()
 
     const [registerName, setregisterName] = useState(null)
     const [registerEmail, setregisterEmail] = useState(null);
@@ -36,7 +39,7 @@ const Register = () => {
                     icon: 'success',
                     position: 'center',
                 }).then(res => {
-                    //navegar
+                    setTimeout(3000, navigate('/'))
                 })
             }).catch((error) => {
                 console.log(error)
@@ -143,6 +146,7 @@ const Register = () => {
                         </Form>
                     </Card.Body>
                 </Card>
+                <Link to="/login">ya tienes una cuenta?</Link>
             </Container>
         </div>
     )

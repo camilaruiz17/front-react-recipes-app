@@ -22,6 +22,7 @@ const {
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
+    console.log(formData.getAll("email"))
     login(formData).then(
       response => {
         const {data } =  response
