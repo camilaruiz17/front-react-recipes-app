@@ -138,15 +138,16 @@ const Register = () => {
                                     <small className="fail">El número máximo de caracteres es ocho</small>
                                 )}
                             </Form.Group>
+                            <Link to="/login">ya tienes una cuenta?</Link>
                             <div id="btnContainer">
                                 <Button id="createBtn" variant="primary" type="submit">
                                     Enviar
                                 </Button>
                             </div>
+                            
                         </Form>
                     </Card.Body>
                 </Card>
-                <Link to="/login">ya tienes una cuenta?</Link>
             </Container>
         </div>
     )

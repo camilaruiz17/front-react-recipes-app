@@ -1,6 +1,6 @@
 
 import RecipeReviewCard from "../../components/Card-recipes/Card-recipes";
-import Footer from "../../components/footer/Footer";
+
 
 function Home(){
 
@@ -11,7 +11,6 @@ function Home(){
         <RecipeReviewCard/>
         <RecipeReviewCard/>
         <RecipeReviewCard/>
-        <Footer/>
         </div>
     )
     }

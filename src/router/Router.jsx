@@ -8,6 +8,7 @@ import Login from "../views/login/Login";
 import NavBars from "../components/nav-bar/NavBar";
 import Register from "../views/register/Register";
 import PerfilViews from "../components/profile-user/Profile-user";
+import Footer from "../components/footer/Footer";
 
 
 const Router = () => {
@@ -24,6 +25,7 @@ const Router = () => {
             <Route path="/search/:busqueda" element={<Search />} />
             <Route path="/register" element={<Register />} />
         </Routes>
+        < Footer/>
         </BrowserRouter>
     );
     };
