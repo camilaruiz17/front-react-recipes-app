@@ -61,12 +61,16 @@ const handleLogOut = () => {
                     <Nav.Link><Link onClick={handleLogOut} className="link_brand danger">
                         Logout
                     </Link></Nav.Link>
-                  ) : <Nav.Link className="loginCustom"><Link to={'/login'}>Login</Link>
-                  
-                  
-                  <Link to={'/register'}>Registrate</Link>
-                  
-                  </Nav.Link>
+                  ) : (
+                    <>
+                    <Nav.Link className="loginCustom">
+                      <Link to={'/login'}>Login</Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Link to={'/register'}>Registrate</Link>
+                    </Nav.Link>
+                    </>
+                    )
                   
                   }
           
