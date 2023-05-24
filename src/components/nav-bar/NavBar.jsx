@@ -57,10 +57,16 @@ const handleLogOut = () => {
             
           </Nav>
           {localStorage.getItem("token") ? (
-                    
-                    <Nav.Link><Link onClick={handleLogOut} className="link_brand danger">
+                    <>
+                    <Nav.Link>
+                      <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
-                    </Link></Nav.Link>
+                    </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Link to={'/profile'}>Perfil</Link>
+                      </Nav.Link>
+                      </>
                   ) : (
                     <>
                     <Nav.Link className="loginCustom">

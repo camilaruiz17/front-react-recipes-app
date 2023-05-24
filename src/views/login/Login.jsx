@@ -28,7 +28,7 @@ const {
         const {data } =  response
         if (data.access_token) {
           localStorage.setItem('token', data.access_token)
-            navigate('/profile')
+            navigate('/')
         }
       }
       ).catch(
