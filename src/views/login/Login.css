@@ -1,17 +1,20 @@
 #logCard{
-    margin-top: auto;
+    padding-top: 140px;
+    margin-top: 0;
 }
 
 .logStyle{
     text-align: left;
     padding: 30px;
-    color: #D1F961;
+    color: 
+    #644905;
     font-family: 'Fresca', sans-serif;
     font-size: 1.2em;
 }
 
 #labTypoColor{
-    color: #D1F961;
+    color: 
+    #795908;
 }
 
 .login-card {
@@ -19,7 +22,7 @@
     max-width: 500px;
     border-radius: 30px;
     margin: 30px auto;
-    background-color: #6A5684;
+   
     padding: 100px;
 }
 
@@ -29,10 +32,13 @@
     border-radius: 10px;
     margin-bottom: 10px;
     padding: 0px 30px 0px 30px;
-    background-color: #96AA1B ;
-    color: #D1F961;
+    background-color: 
+    #f7b103 ;
+    color: 
+    #6e5005;
     font-family: 'Fresca', sans-serif;
     font-size: 1.2em;
+    --bs-btn-border-color: 0;
 }
 
 #forgPassword{

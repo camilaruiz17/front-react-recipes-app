@@ -3,17 +3,18 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../register/Register.css";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { registerUser } from "../../services/register.service"
 
-const Register = () => {
-    
+const Register = ({redirectTo}) => {
     const navigate = useNavigate()
+    const params = useParams()
 
     const [registerName, setregisterName] = useState(null)
     const [registerEmail, setregisterEmail] = useState(null);
     const [password, setpassword] = useState(null);
     const [confirmPassword, setconfirmPassword] = useState(null);
+    const [redirectUrl, setRedirectUrl] = useState(null)
 
     const {
         register,
@@ -39,7 +40,15 @@ const Register = () => {
                     icon: 'success',
                     position: 'center',
                 }).then(res => {
-                    setTimeout(3000, navigate('/'))
+                    setTimeout(() => {
+                        console.log(response)
+                        console.log('redirec', redirectUrl)
+                        if (redirectUrl) {
+                            navigate(`/login/${redirectUrl}`)
+                        } else {
+                            navigate('/')
+                        }
+                    }, 3000)
                 })
             }).catch((error) => {
                 console.log(error)
@@ -60,6 +69,14 @@ const Register = () => {
         };
 
     }
+
+    useEffect(() => {
+        if (redirectTo) {
+            setRedirectUrl(`/${redirectTo}`)
+        } else if (params.redirectTo) {
+            setRedirectUrl(`/${params.redirectTo}`)
+        }
+    }, [redirectTo, params.redirectTo])
 
     return (
         <div className="profileWrapper">
@@ -138,7 +155,7 @@ const Register = () => {
                                     <small className="fail">El número máximo de caracteres es ocho</small>
                                 )}
                             </Form.Group>
-                            <Link to="/login">ya tienes una cuenta?</Link>
+                            <Link to={`/login${redirectUrl}`}>ya tienes una cuenta?</Link>
                             <div id="btnContainer">
                                 <Button id="createBtn" variant="primary" type="submit">
                                     Enviar

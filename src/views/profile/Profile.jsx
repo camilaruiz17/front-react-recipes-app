@@ -1,4 +1,5 @@
-import NavBar from "../../components/nav-bar/NavBar"
+import FormRecipes from "../../components/form-recipes/Form-recipes"
+
 
 function Profile(){
 
@@ -6,6 +7,10 @@ function Profile(){
         <div>
             
             <h2>Hola este es el perfil de usuarios</h2>
+
+            <FormRecipes/>
+
+            
             </div>
 
     )

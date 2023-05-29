@@ -19,3 +19,11 @@ height: 10pxpx;
     margin-right: 12px;
     font-size: 16px;
 }
+
+
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+    
+}

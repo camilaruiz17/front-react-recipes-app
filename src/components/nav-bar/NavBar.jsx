@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import "../nav-bar/navBar.css"
+import "../nav-bar/NavBar.css"
 import { useState } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ const handleLogOut = () => {
       setTimeout(3000, navigate('/'))});
 };
     return (
-    <Navbar className= "customnav" bg="light" expand="lg" fixed="top" data-bs-toggle="collapse">
+    <Navbar collapseOnSelect={true} className= "customnav" bg="light" expand="lg" fixed="top" data-bs-toggle="collapse">
       <Container fluid>
         <Navbar.Brand className="customLogo"><Link to={'/'}><img src="/logo.png" alt="logo"></img></Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -52,34 +52,33 @@ const handleLogOut = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link><Link to={'/'}>Inicio</Link></Nav.Link>
-            
+            <Nav.Link eventKey="1"><Link to={'/'}>Inicio</Link></Nav.Link>
+            <Nav.Link eventKey="2"><Link to={'/create'}>Crear</Link></Nav.Link>
             
           </Nav>
           {localStorage.getItem("token") ? (
                     <>
-                    <Nav.Link>
+                    <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
                     </Link>
                     </Nav.Link>
-                    <Nav.Link>
+                    <Nav.Link eventKey="4">
                       <Link to={'/profile'}>Perfil</Link>
                       </Nav.Link>
                       </>
                   ) : (
                     <>
-                    <Nav.Link className="loginCustom">
+                    <Nav.Link className="loginCustom" eventKey="5">
                       <Link to={'/login'}>Login</Link>
                     </Nav.Link>
-                    <Nav.Link>
+                    <Nav.Link eventKey="6">
                       <Link to={'/register'}>Registrate</Link>
                     </Nav.Link>
                     </>
                     )
                   
                   }
-          
           
           <Form className="d-flex">
             <Form.Control

@@ -4,13 +4,17 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from "react-hook-form";
 import { Alert, Card, Container } from 'react-bootstrap';
 import { login } from "../../services/login.service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../login/Login.css"
 
 
 const Login = () => {
   const [loginError, setLoginError] = useState(false)
   const navigate = useNavigate()
+  const params = useParams();
+  const [isRedirect, setIsRedirect] = useState(false)
+
+  console.log('fasdfasdf', params)
 
 const {
     register,
@@ -28,7 +32,13 @@ const {
         const {data } =  response
         if (data.access_token) {
           localStorage.setItem('token', data.access_token)
+          console.log('aca')
+          if (isRedirect) {
+            console.log('navegando')
+            navigate(`/${params.redirectTo}`)
+          } else {
             navigate('/')
+          }
         }
       }
       ).catch(
@@ -46,6 +56,9 @@ const {
 
   useEffect(() => {
     // validar token
+    if (params.redirectTo) {
+      setIsRedirect(true)
+    }
   }, [])
 
 
