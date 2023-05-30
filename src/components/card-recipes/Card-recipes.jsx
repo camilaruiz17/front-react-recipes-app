@@ -1,21 +1,53 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "../card-recipes/Card-Recipes.css"
+import FormRecipes from '../form-recipes/Form-recipes';
+import { useEffect } from "react";
+import { useState } from "react";
+import { getRecipe } from '../../services/recipes.service';
+import { Container } from 'react-bootstrap';
 
-function CardRecipe() {
+function ShowAll () {
+  const [recipesArray, setFormRecipes] = useState(null);
+  
+  const showFormRecipes = () => {
+  getRecipe().then(
+      response => {
+          setFormRecipes(response.data)
+      }
+      ).catch(e => {
+      console.log (e)
+      }) 
+  }
+  useEffect(() => {
+      showFormRecipes();
+  }, [])
+  
   return (
-    <Card className="CardCook"style={{ width: '50rem' }}>
-      <Card.Img variant="top" src="https://i.blogs.es/1462bc/pollo-asado-arguinano2/1366_2000.jpg" />
+
+  
+    <div>
+      {
+        recipesArray && recipesArray.map((recipe) => {
+          return (
+            <Card id={recipe.id} refreshAction={showFormRecipes} className="CardCook"style={{ width: '25rem' }}>
+            <Card.Img src={recipe.imgRecipe}  variant="top" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{recipe.title}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        {' '+ recipe.description}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">Ver más</Button>
       </Card.Body>
     </Card>
-  );
-}
+          )
+          }
+  )
+        }
+    
+      </div>
+)
+};
 
-export default CardRecipe;
+
+export default ShowAll;

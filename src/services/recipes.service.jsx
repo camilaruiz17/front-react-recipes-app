@@ -13,3 +13,9 @@ const config = {
 };
 return axios.post(baseUrl + "/createRecipes", data, config);
 };
+
+export const getRecipe = (data) => {
+
+
+return axios.get(baseUrl + "/recipes", data);
+    };

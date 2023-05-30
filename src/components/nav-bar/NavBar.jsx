@@ -9,6 +9,7 @@ import { useState } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function NavBars() {
   const [searchValue, setSearchValue]=useState("");
@@ -44,28 +45,29 @@ const handleLogOut = () => {
     return (
     <Navbar collapseOnSelect={true} className= "customnav" bg="light" expand="lg" fixed="top" data-bs-toggle="collapse">
       <Container fluid>
-        <Navbar.Brand className="customLogo"><Link to={'/'}><img src="/logo.png" alt="logo"></img></Link></Navbar.Brand>
+        <Navbar.Brand className="customLogo"><Link to={'/'}><img src="/logo.png" alt="logo" width="200px"></img></Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className=" linksmap me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
+            style={{ maxHeight: '155px' }}
             navbarScroll
           >
             <Nav.Link eventKey="1"><Link to={'/'}>Inicio</Link></Nav.Link>
-            <Nav.Link eventKey="2"><Link to={'/create'}>Crear</Link></Nav.Link>
+            <Nav.Link eventKey="2"><Link to={'/create'}>
+            Crear receta</Link></Nav.Link>
             
-          </Nav>
+          
           {localStorage.getItem("token") ? (
                     <>
-                    <Nav.Link eventKey="3">
+                    <Nav.Link eventKey="4">
+                      <Link to={'/profile'}>Perfil</Link>
+                      </Nav.Link>
+                      <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
                     </Link>
                     </Nav.Link>
-                    <Nav.Link eventKey="4">
-                      <Link to={'/profile'}>Perfil</Link>
-                      </Nav.Link>
                       </>
                   ) : (
                     <>
@@ -79,7 +81,7 @@ const handleLogOut = () => {
                     )
                   
                   }
-          
+          </Nav>
           <Form className="d-flex">
             <Form.Control
               onKeyUp={handleKeyUp}

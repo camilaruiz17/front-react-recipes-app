@@ -11,7 +11,7 @@ function Home(){
         <h1>hola este es el home </h1>
         <h1>hola este es el home </h1>
         <h1>hola este es el home </h1>
-
+        <CardRecipe/>
         </div>
     )
     }
