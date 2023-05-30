@@ -6,7 +6,6 @@ function CreateRecipes(){
     const navigate = useNavigate()
     useEffect(() => {
         if (!localStorage.getItem('token')) {
-            console.log('asdf')
             navigate('/register/create')
         }
     })

@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getRecipe } from '../../services/recipes.service';
 import { Container } from 'react-bootstrap';
+import { Link, useNavigate} from "react-router-dom";
 
 function ShowAll () {
   const [recipesArray, setFormRecipes] = useState(null);
+  const navigate = useNavigate()
+
   
   const showFormRecipes = () => {
   getRecipe().then(
@@ -24,26 +27,25 @@ function ShowAll () {
   }, [])
   
   return (
-
-  
     <div>
       {
         recipesArray && recipesArray.map((recipe) => {
           return (
-            <Card id={recipe.id} refreshAction={showFormRecipes} className="CardCook"style={{ width: '25rem' }}>
-            <Card.Img src={recipe.imgRecipe}  variant="top" />
-      <Card.Body>
-        <Card.Title>{recipe.title}</Card.Title>
-        <Card.Text>
-        {' '+ recipe.description}
-        </Card.Text>
-        <Button variant="primary">Ver más</Button>
-      </Card.Body>
-    </Card>
+                  <Card id={recipe.id} refreshAction={showFormRecipes} className="CardCook"style={{ width: '25rem' }}>
+                    <Card.Img src={recipe.imgRecipe}  variant="top" /> 
+                    <Card.Body>
+                      <Card.Title>{recipe.title}</Card.Title>
+                      <Card.Text>
+                      {' '+ recipe.description}
+                      </Card.Text>
+                      <Button variant="primary" onClick={() => navigate('recipes/' + recipe.id)}>
+                          Ver más
+                      </Button>
+                  </Card.Body>
+                </Card>
           )
-          }
-  )
-        }
+        })
+      }
     
       </div>
 )

@@ -40,15 +40,12 @@ const Register = ({redirectTo}) => {
                     icon: 'success',
                     position: 'center',
                 }).then(res => {
-                    setTimeout(() => {
-                        console.log(response)
-                        console.log('redirec', redirectUrl)
-                        if (redirectUrl) {
-                            navigate(`/login/${redirectUrl}`)
-                        } else {
-                            navigate('/')
-                        }
-                    }, 3000)
+                    localStorage.setItem('token', response.data.access_token)
+                    if (redirectUrl) {
+                        navigate(`/${redirectUrl}`)
+                    } else {
+                        navigate('/')
+                    }
                 })
             }).catch((error) => {
                 console.log(error)

@@ -21,15 +21,9 @@ function NavBars() {
     setSearchValue(event.target.value)
   }
   const handleSearch = async () => {
-    if (busqueda.length > 0) {
+    if (searchValue.length > 0) {
       await axios
-          .get("http://localhost:8000/api/search/" + busqueda)
-          .then((response) => {
-            setResults(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+         navigate('search/'+searchValue)
     } else {
       setResults(null);
     }
