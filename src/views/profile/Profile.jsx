@@ -8,7 +8,7 @@ function Profile(){
             
             <h2>Hola este es el perfil de usuarios</h2>
 
-            <FormRecipes/>
+        
 
             
             </div>

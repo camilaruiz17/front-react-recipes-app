@@ -84,7 +84,7 @@ const FormRecipes = () => {
             <p className="regisTitle">Agrega tu receta</p>
             <a class="btn btn-primary" data-bs-toggle="collapse" onClick="" role="button" aria-expanded="false" aria-controls="collapseExample">
     Link with href
-  </a>
+</a>
                 <Card id="regisCardStyle" className="text-start">
                     <Card.Title id="regisTittle" className="text-center"></Card.Title>
                     <Card.Body>
@@ -166,7 +166,7 @@ const FormRecipes = () => {
                                     {...register("ingredients", {
                                         required: true,
                                         minLength: 5,
-                                        maxLength: 200,
+                                        maxLength: 500,
                                     })}
                                 />
                                 {errors.ingredients?.type === "required" && (
@@ -183,14 +183,14 @@ const FormRecipes = () => {
                                     {...register("description", {
                                         required: true,
                                         minLength: 4,
-                                        maxLength: 48,
+                                        maxLength: 900,
                                     })}
                                 />
-                                {errors.description?.type === "required" && (
+                            {errors.description?.type === "required" && (
                                     <small className="fail">
                                         Este campo no puede estar vacío
-                                    </small>
-                                )}
+                                    </small> 
+                                )} 
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="recipeinstruction">
                                 <Form.Label>Instrucciones</Form.Label>
