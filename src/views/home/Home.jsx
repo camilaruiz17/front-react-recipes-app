@@ -6,11 +6,7 @@ import "../home/Home.css"
 function Home(){
 
     return (
-        <div>
-        <h1>hola este es el home </h1>
-        <h1>hola este es el home </h1>
-        <h1>hola este es el home </h1>
-        <h1>hola este es el home </h1>
+        <div className="homeStyle">
         <CardRecipe/>
         </div>
     )

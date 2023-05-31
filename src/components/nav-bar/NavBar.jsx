@@ -44,10 +44,9 @@ const handleLogOut = () => {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className=" linksmap me-auto my-2 my-lg-0"
-            style={{ maxHeight: '155px' }}
             navbarScroll
           >
-            <Nav.Link eventKey="1"><Link to={'/'}>Inicio</Link></Nav.Link>
+            
             <Nav.Link eventKey="2"><Link to={'/create'}>
             Crear receta</Link></Nav.Link>
             
@@ -84,7 +83,7 @@ const handleLogOut = () => {
               className="me-2"
               aria-label="Search"
             />
-            <Button eventKey="7" variant="outline-success" type="button" onClick={handleSearch}>Buscar</Button>
+            <Button data-bs-toggle="hidden.bs.collapse" variant="outline-success" type="button" onClick={handleSearch} >Buscar</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

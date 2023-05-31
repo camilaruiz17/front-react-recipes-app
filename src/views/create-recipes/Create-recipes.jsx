@@ -12,7 +12,6 @@ function CreateRecipes(){
 
     return (
         <div>
-            <h2>Esta es la vista que esta en veremos</h2>
         <FormRecipes/>
         </div>
     )

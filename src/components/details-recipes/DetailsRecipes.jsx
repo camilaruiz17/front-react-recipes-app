@@ -13,10 +13,12 @@ const RecipeDetails = ({ recipeData }) => {
                 <Card.Body>
                 <Card.Title>{recipe ? recipe.title : '...'}</Card.Title>
                 <ListGroup className="list-group-flush">
-                <ListGroup.Item>Ingredientes: {recipe ? recipe.ingredients : '...'}</ListGroup.Item>
+                <ListGroup.Item>Descripción: {recipe ? recipe.description : '...'}</ListGroup.Item>
                 <ListGroup.Item>Tiempo: {recipe ? recipe.timeCook : '...'}</ListGroup.Item>
                 <ListGroup.Item>Porciones: {recipe ? recipe.portions : '...'}</ListGroup.Item>
-                <ListGroup.Item>Pasos de la receta: {recipe ? recipe.description : '...'}</ListGroup.Item>
+                <ListGroup.Item>Ingredientes: {recipe ? recipe.ingredients : '...'}</ListGroup.Item>
+                
+                <ListGroup.Item>Pasos de la receta: {recipe ? recipe.instructions : '...'}</ListGroup.Item>
                 </ListGroup>
                 </Card.Body>
                 

@@ -12,7 +12,7 @@ export const postRecipe = (data) => {
                 Authorization: `Bearer ${getToken()}`,
             },
         };
-    return axios.post(baseUrl + "/createRecipes", data, config);
+    return axios.post(baseUrl + "/recipes", data, config);
 };
 
 export const getRecipe = (data) => {
@@ -26,3 +26,12 @@ export const getRecipeById = (id) => {
 export const getRecipeByTitle = (title) => {
     return axios.get(baseUrl + "/recipes/search/" + title);
 }
+
+export const getmyRecipe = (data) => {
+    const config = {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        };
+    return axios.get(baseUrl + "/myRecipes", config);
+};
