@@ -5,19 +5,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "../nav-bar/NavBar.css"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import AddBoxIcon from '@mui/icons-material/AddBox';
+
 
 function NavBars() {
   const [searchValue, setSearchValue]=useState("");
   const [results, setResults] = useState(null);
   
   const navigate = useNavigate()
-  const [username, setUsername] = useState('');
-  
+  const [name, setName] = useState(null);
+
     const handleKeyUp=(event)=>{
     setSearchValue(event.target.value)
   }
@@ -41,8 +42,10 @@ useEffect(() => {
       }
     })
       .then(response => {
+        // Registrar la respuesta de la API en la consola
+        console.log('Respuesta de la API:', response);
         // Actualizar el estado con el nombre del usuario
-        setUsername(response.data.name);
+        setName(response.data.name);
       });
   }
 }, []);
@@ -73,19 +76,14 @@ const handleLogOut = () => {
           
           {localStorage.getItem("token") ? (
                     <>
-                    <Nav.Link eventKey="4">
-                      <Link to={'/profile'}>Perfil</Link>
+                      <Nav.Link eventKey="7">
+                        Hola, {name}
                       </Nav.Link>
                       <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
                     </Link>
                     </Nav.Link>
-                      {username && (
-                        <Nav.Link eventKey="7">
-                          Hola, {username}
-                      </Nav.Link>
-                      )}
                       </>
                   ) : (
                     <>
@@ -96,8 +94,6 @@ const handleLogOut = () => {
                       <Link to={'/register'}>Registrate</Link>
                     </Nav.Link>
                     </>
-                    
-
                     )
                   
                   }
