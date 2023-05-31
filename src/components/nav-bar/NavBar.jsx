@@ -16,6 +16,7 @@ function NavBars() {
   const [results, setResults] = useState(null);
   
   const navigate = useNavigate()
+  const [username, setUsername] = useState('');
   
     const handleKeyUp=(event)=>{
     setSearchValue(event.target.value)
@@ -28,6 +29,24 @@ function NavBars() {
       setResults(null);
     }
 };
+
+useEffect(() => {
+  // Obtener el token del almacenamiento local
+  const token = localStorage.getItem('token');
+  if (token) {
+    // Hacer una llamada a la API para obtener el nombre del usuario
+    axios.get('/api/user', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        // Actualizar el estado con el nombre del usuario
+        setUsername(response.data.name);
+      });
+  }
+}, []);
+
 const handleLogOut = () => {
     localStorage.clear();
     Swal.fire({title:'Closed',
@@ -62,6 +81,11 @@ const handleLogOut = () => {
                         Logout
                     </Link>
                     </Nav.Link>
+                      {username && (
+                        <Nav.Link eventKey="7">
+                          Hola, {username}
+                      </Nav.Link>
+                      )}
                       </>
                   ) : (
                     <>
@@ -72,6 +96,8 @@ const handleLogOut = () => {
                       <Link to={'/register'}>Registrate</Link>
                     </Nav.Link>
                     </>
+                    
+
                     )
                   
                   }
@@ -90,6 +116,7 @@ const handleLogOut = () => {
       </Container>
     </Navbar>
       );
-      }
+
+}
 
 export default NavBars;
