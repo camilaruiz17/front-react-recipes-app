@@ -19,6 +19,7 @@ function NavBars() {
   const navigate = useNavigate()
   const [name, setName] = useState(null);
 
+
     const handleKeyUp=(event)=>{
     setSearchValue(event.target.value)
   }
@@ -32,22 +33,10 @@ function NavBars() {
 };
 
 useEffect(() => {
-  // Obtener el token del almacenamiento local
-  const token = localStorage.getItem('token');
-  if (token) {
-    // Hacer una llamada a la API para obtener el nombre del usuario
-    axios.get('/api/user', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        // Registrar la respuesta de la API en la consola
-        console.log('Respuesta de la API:', response);
-        // Actualizar el estado con el nombre del usuario
-        setName(response.data.name);
-      });
-  }
+  // Obtener el nombre del usuario del almacenamiento local
+  const name = localStorage.getItem('name');
+  // Actualizar el estado con el nombre del usuario
+  setName(name);
 }, []);
 
 const handleLogOut = () => {
@@ -69,14 +58,13 @@ const handleLogOut = () => {
             style={{ maxHeight: '155px' }}
             navbarScroll
           >
-            <Nav.Link eventKey="1"><Link to={'/'}>Inicio</Link></Nav.Link>
             <Nav.Link eventKey="2"><Link to={'/create'}>
             Crear receta</Link></Nav.Link>
             
           
           {localStorage.getItem("token") ? (
                     <>
-                      <Nav.Link eventKey="7">
+                      <Nav.Link eventKey="1">
                         Hola, {name}
                       </Nav.Link>
                       <Nav.Link eventKey="3">
