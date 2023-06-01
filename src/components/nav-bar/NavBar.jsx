@@ -12,12 +12,14 @@ import Swal from "sweetalert2";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
+
 function NavBars() {
   const [searchValue, setSearchValue]=useState("");
   const [results, setResults] = useState(null);
   
   const navigate = useNavigate()
   const [name, setName] = useState(null);
+  const userName = localStorage.getItem('name');
 
 
     const handleKeyUp=(event)=>{
@@ -34,9 +36,9 @@ function NavBars() {
 
 useEffect(() => {
   // Obtener el nombre del usuario del almacenamiento local
-  const name = localStorage.getItem('name');
+  const storedName = localStorage.getItem('name')
   // Actualizar el estado con el nombre del usuario
-  setName(name);
+  setName(storedName);
 }, []);
 
 const handleLogOut = () => {
@@ -65,7 +67,7 @@ const handleLogOut = () => {
           {localStorage.getItem("token") ? (
                     <>
                       <Nav.Link eventKey="1">
-                        Hola, {name}
+                        Hola, {userName}
                       </Nav.Link>
                       <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
