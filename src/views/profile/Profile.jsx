@@ -6,6 +6,7 @@ import { useState } from "react";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useNavigate} from "react-router-dom";
+import DeleteRecipe from "../../components/delete-recipe/Delete-recipe";
     
 const Profile = () => {
 
@@ -39,10 +40,12 @@ const showmyRecipes = () => {
                     <ListGroup.Item>Porciones: {recipe ? recipe.portions : '...'}</ListGroup.Item>
                     <ListGroup.Item>Ingredientes: {recipe ? recipe.ingredients : '...'}</ListGroup.Item>
                     <ListGroup.Item>Pasos de la receta: {recipe ? recipe.instructions : '...'}</ListGroup.Item>
+                    <DeleteRecipe id={recipe.id} refreshAction={showmyRecipes}/>
                     </ListGroup>
                     </Card.Body>
                     
                     </Card>
+                    
                 )
             })
                 
