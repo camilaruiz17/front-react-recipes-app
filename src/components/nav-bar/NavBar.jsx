@@ -26,9 +26,9 @@ function NavBars() {
     setSearchValue(event.target.value)
   }
   const handleSearch = async () => {
-    if (searchValue.length > 0) {
+  if (searchValue.length > 0) {
       await axios
-         navigate('search/'+searchValue)
+        navigate('search/'+searchValue)
     } else {
       setResults(null);
     }
@@ -57,9 +57,9 @@ const handleLogOut = () => {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className=" linksmap me-auto my-2 my-lg-0"
-            style={{ maxHeight: '155px' }}
             navbarScroll
           >
+            
             <Nav.Link eventKey="2"><Link to={'/create'}>
             Crear receta</Link></Nav.Link>
             
@@ -80,7 +80,7 @@ const handleLogOut = () => {
                     <Nav.Link className="loginCustom" eventKey="5">
                       <Link to={'/login'}>Login</Link>
                     </Nav.Link>
-                    <Nav.Link eventKey="6">
+                    <Nav.Link  eventKey="6">
                       <Link to={'/register'}>Registrate</Link>
                     </Nav.Link>
                     </>
@@ -96,7 +96,7 @@ const handleLogOut = () => {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success" type="button" onClick={handleSearch}>Buscar</Button>
+            <Button data-bs-toggle="hidden.bs.collapse" variant="outline-success" type="button" onClick={handleSearch} >Buscar</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

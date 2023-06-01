@@ -1,6 +1,6 @@
 import { Card, Container, Form, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller} from "react-hook-form";
 import "../register/Register.css";
 import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -42,7 +42,8 @@ const Register = ({redirectTo}) => {
                 }).then(res => {
                     localStorage.setItem('token', response.data.access_token)
                     if (redirectUrl) {
-                        navigate(`/${redirectUrl}`)
+                        console.log('red', redirectUrl)
+                        navigate(`${redirectUrl}`)
                     } else {
                         navigate('/')
                     }
@@ -108,12 +109,21 @@ const Register = ({redirectTo}) => {
                                 <input
                                 type="text"
                                 placeholder="Escribe tu correo electrónico "
-                                    className={errors.email ? 'form-control shadow fail' : 'form-control shadow'}
-                                    {...register("email", { required: "Es necesario introducir un email" })}
-                                    aria-invalid={errors.email ? "true" : "false"}
-                                />
+                                    className={errors.name ? 'form-control shadow fail' : 'form-control shadow'}
+                                    {...register("email", { 
+                                        required: true, 
+                                        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                                    })}
+                                    />
+                                    
                                 {errors.email && <p role="alert">{errors.email?.message}</p>}
-                            </Form.Group>
+                                {errors.email?.type === "pattern" && (
+                                <small className="fail">
+                                {" "}
+                                Mail can only contain letters, numbers, periods, hyphens, and
+                            underscores
+                                </small>
+                                )}</Form.Group>
                             <Form.Group className="mb-3" controlId="password">
                                 <Form.Label>Contraseña</Form.Label>
                                 <input

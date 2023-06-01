@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { Card, Container, Form, Button } from "react-bootstrap";
+import { Card, Container, Form, Button, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { postRecipe } from "../../services/recipes.service";
 import { useNavigate, Link } from "react-router-dom";
@@ -30,11 +30,12 @@ const FormRecipes = () => {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
-        formData.append("imgRecipe", data.imgRecipe[0]);
+        formData.append("imgRecipe", 'https://www.laylita.com/recetas/wp-content/uploads/Patacones-o-tostones-caseros.jpg'),//data.imgRecipe[0]);
         formData.append("timeCook", data.timeCook);
         formData.append("portions", data.portions);
         formData.append("ingredients", data.ingredients);
         formData.append("instructions", data.instructions);
+        //console.log(formData.get
         postRecipe(formData)
             .then((response) => {
                 handleReset();
@@ -80,11 +81,7 @@ const FormRecipes = () => {
             <div>
             </div>
             <Container className="p-5">
-            <Button variant="outline-primary">Agrega tu receta</Button>{' '}
             <p className="regisTitle">Agrega tu receta</p>
-            <a class="btn btn-primary" data-bs-toggle="collapse" onClick="" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
                 <Card id="regisCardStyle" className="text-start">
                     <Card.Title id="regisTittle" className="text-center"></Card.Title>
                     <Card.Body>
@@ -96,7 +93,7 @@ const FormRecipes = () => {
                                 <Form.Label>Titulo</Form.Label>
                                 <input
                                     type="text"
-                                    placeholder="Escribe el Nombre"
+                                    placeholder="Escribe el nombre de tu receta"
                                     className={
                                         errors.name
                                             ? "form-control shadow fail"
@@ -115,6 +112,23 @@ const FormRecipes = () => {
                                 {errors.title?.type === "maxLength" && (
                                     <small className="fail">Corrija el campo</small>
                                 )}
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="recipedescription">
+                                <Form.Label>Descripción del plato</Form.Label>
+                                <Form.Control as="textarea" className="inputEdit"
+                                    type="text"
+                                    placeholder="Escribe una breve descripción de la receta"
+                                    {...register("description", {
+                                        required: true,
+                                        minLength: 4,
+                                        maxLength: 280,
+                                    })}
+                                />
+                            {errors.description?.type === "required" && (
+                                    <small className="fail">
+                                        Este campo no puede estar vacío
+                                    </small> 
+                                )} 
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="recipestime">
                                 <Form.Label>Tiempo de preparación</Form.Label>
@@ -158,43 +172,29 @@ const FormRecipes = () => {
                                     <option value="7 personas">7 a mas personas</option>
                                 </Form.Select>
                             </Form.Group>
+                            
                             <Form.Group className="mb-3" controlId="recipeingredients">
                                 <Form.Label>Ingredientes</Form.Label>
-                                <input
-                                    type="text"
-                                    placeholder="Escribe los ingredientes"
-                                    {...register("ingredients", {
+                                <Form.Control as="textarea"
+                                type="text" placeholder="Escribe los ingredientes"
+                                {...register("ingredients", {
+                                        
                                         required: true,
                                         minLength: 5,
-                                        maxLength: 200,
+                                        maxLength: 500,
                                     })}
-                                />
+                                    />
                                 {errors.ingredients?.type === "required" && (
                                     <small className="fail">
                                         Este campo no puede estar vacío
                                     </small>
                                 )}
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="recipedescription">
-                                <Form.Label>Descripción del plato</Form.Label>
-                                <input
-                                    type="text"
-                                    placeholder="Escribe una breve descripción de la receta"
-                                    {...register("description", {
-                                        required: true,
-                                        minLength: 4,
-                                        maxLength: 48,
-                                    })}
-                                />
-                                {errors.description?.type === "required" && (
-                                    <small className="fail">
-                                        Este campo no puede estar vacío
-                                    </small>
-                                )}
-                            </Form.Group>
+                                
+                                </Form.Group>
+                            
                             <Form.Group className="mb-3" controlId="recipeinstruction">
                                 <Form.Label>Instrucciones</Form.Label>
-                                <input
+                                <Form.Control as="textarea"
                                     type="text"
                                     placeholder="Introduce el paso a paso para preparar la receta"
                                     {...register("instructions", {
