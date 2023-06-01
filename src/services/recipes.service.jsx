@@ -27,7 +27,17 @@ export const getRecipeByTitle = (title) => {
     return axios.get(baseUrl + "/recipes/search/" + title);
 }
 
-export const getmyRecipe = (data) => {
+export const deleteRecipe = (id) => {
+    const token = localStorage.getItem("token");
+    const config = {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+    }
+    return axios.delete(baseUrl + '/recipes/' + id, config)
+}
+
+export const getmyRecipe = () => {
     const config = {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
