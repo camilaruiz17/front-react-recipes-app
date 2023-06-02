@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { postRecipe } from "../../services/recipes.service";
 import { useNavigate, Link } from "react-router-dom";
 import React, { useState } from "react";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import "./Form-recipes.css";
 
 const FormRecipes = () => {
@@ -15,6 +16,7 @@ const FormRecipes = () => {
     const [recipeingredients, setrecipeingredients] = useState(null);
     const [recipedescription, setrecipedescription] = useState(null);
     const [recipeinstruction, setrecipeinstruction] = useState(null);
+    const [added, setAdded] = useState(false);
     const [recipeimg, setrecipeimg] = useState(null);
 
     const onErrors = (e) => { };
@@ -30,7 +32,7 @@ const FormRecipes = () => {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
-        formData.append("imgRecipe", 'https://www.laylita.com/recetas/wp-content/uploads/Patacones-o-tostones-caseros.jpg'),//data.imgRecipe[0]);
+        formData.append("imgRecipe", recipeimg);
         formData.append("timeCook", data.timeCook);
         formData.append("portions", data.portions);
         formData.append("ingredients", data.ingredients);
@@ -63,6 +65,10 @@ const FormRecipes = () => {
                     "error"
                 );
             });
+        }
+            function getURL(data){
+                setrecipeImg(data);
+            }
 
         const handleReset = () => {
             setrecipetitle(null);
@@ -72,9 +78,10 @@ const FormRecipes = () => {
             setrecipeportions(null);
             setrecipeingredients(null);
             setrecipeinstruction(null);
+            setAdded(false);
             document.getElementById("recipes-form").reset();
         };
-    };
+
 
     return (
         <div className="profileWrapper">
@@ -217,6 +224,7 @@ const FormRecipes = () => {
                             
                             <Form.Group className="mb-3" controlId="recipeimg">
                                 <Form.Label>Foto</Form.Label>
+                                <UploadWidget getUrlFunction={getURL} added={added} onAdd={() => setAdded(true)} />
                                 <input
                                     type="file"
                                     className="form-control shadow"
