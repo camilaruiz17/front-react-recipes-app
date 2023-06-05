@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Card, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { postRecipe } from "../../services/recipes.service";
-import { useNavigate } from "react-router-dom";
+import { editRecipe, getRecipeById } from "../../services/recipes.service";
+import { useNavigate, useParams } from "react-router-dom";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
-import "./Form-recipes.css"
 
-const FormRecipes = () => {
+
+const EditViews = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [added, setAdded] = useState(false);
   const [recipeImg, setRecipeImg] = useState(null);
@@ -19,6 +20,7 @@ const FormRecipes = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -31,7 +33,7 @@ const FormRecipes = () => {
     formData.append("portions", data.portions);
     formData.append("ingredients", data.ingredients);
     formData.append("instructions", data.instructions);
-    postRecipe(formData)
+    editRecipe(id, formData)
       .then(() => {
         handleReset();
         Swal.fire({
@@ -61,13 +63,31 @@ const FormRecipes = () => {
     document.getElementById("recipes-form").reset();
   };
 
+  useEffect(() => {
+    getRecipeById(id).then(
+      (response) => {
+        reset({
+          description: response.data.description,
+          imgRecipe: response.data.imgRecipe,
+          ingredients: response.data.ingredients,
+          instructions: response.data.instructions,
+          portions: response.data.portions,
+          timeCook: response.data.timeCook,
+          title: response.data.title
+        })
+        setRecipeImg(response.data.imgRecipe)
+      }
+    )
+  }, [id, reset])
+
   return (
     <div className="form-container p-5">
       <Card id="regisCardStyle" className="text-start">
         <Card.Title id="regisTittle" className="text-center text-white">
-          <h2>Agrega tu receta</h2>
+          <h2>Edita tu receta</h2>
         </Card.Title>
         <Card.Body>
+          <Card.Img variant="top" src={recipeImg ? recipeImg : "..."}></Card.Img>
           <Form
             id="recipes-form"
             onSubmit={handleSubmit(customSubmit, onErrors)}
@@ -75,6 +95,7 @@ const FormRecipes = () => {
             <Form.Group className="mb-3" controlId="recipestitle">
               <Form.Label>Titulo</Form.Label>
               <input
+                name="title"
                 type="text"
                 placeholder="Escribe el nombre de tu receta"
                 className={
@@ -97,6 +118,7 @@ const FormRecipes = () => {
             <Form.Group className="mb-3" controlId="recipedescription">
               <Form.Label>Descripción del plato</Form.Label>
               <Form.Control
+                name="description"
                 as="textarea"
                 className="inputEdit"
                 type="text"
@@ -114,6 +136,7 @@ const FormRecipes = () => {
             <Form.Group className="mb-3" controlId="recipestime">
               <Form.Label>Tiempo de preparación</Form.Label>
               <input
+                name="timeCook"
                 type="text"
                 placeholder="Escribe en cuanto tiempo se prepara"
                 className={
@@ -135,8 +158,9 @@ const FormRecipes = () => {
               <Form.Label>Porciones</Form.Label>
               <Form.Select
                 id="selectField"
+                name="portions"
                 className={
-                  errors.sector
+                  errors.portions
                     ? "form-control shadow fail"
                     : "form-control shadow"
                 }
@@ -157,13 +181,14 @@ const FormRecipes = () => {
             <Form.Group className="mb-3" controlId="recipeingredients">
               <Form.Label>Ingredientes</Form.Label>
               <Form.Control
+                name="ingredients"
                 as="textarea"
                 type="text"
                 placeholder="Escribe los ingredientes"
                 {...register("ingredients", {
                   required: true,
                   minLength: 5,
-                  maxLength: 500,
+                  maxLength: 1000,
                 })}
               />
               {errors.ingredients?.type === "required" && (
@@ -176,11 +201,12 @@ const FormRecipes = () => {
               <Form.Control
                 as="textarea"
                 type="text"
+                name="instructions"
                 placeholder="Introduce el paso a paso para preparar la receta"
                 {...register("instructions", {
                   required: true,
                   minLength: 5,
-                  maxLength: 300,
+                  maxLength: 1000,
                 })}
               />
               {errors.instruction?.type === "required" && (
@@ -199,12 +225,13 @@ const FormRecipes = () => {
                   getUrlFunction={getURL}
                   added={added}
                   onAdd={() => setAdded(true)}
+                  text='Cambiar Imagen'
                 />
               </Form.Label>
             </Form.Group>
             <div id="btnContainer">
               <Button id="createBtn" variant="primary" type="submit">
-                Crear Receta
+                Guardar Cambios
               </Button>
             </div>
           </Form>
@@ -214,4 +241,4 @@ const FormRecipes = () => {
   );
 };
 
-export default FormRecipes;
+export default EditViews;

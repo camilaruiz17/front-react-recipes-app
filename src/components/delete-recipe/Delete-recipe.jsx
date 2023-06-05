@@ -30,10 +30,10 @@ const handleDeleteRecipe = () => {
 }
 return (
     
-    <div>
+    <div className="mt-3 mw-3">
     <Tooltip title="Delete">
-    <IconButton>
-        {' '}<DeleteIcon fontSize="large" title="Borrar" color="disabled" className="delete-icon" onClick={handleDeleteRecipe}/>
+    <IconButton className="text-white" onClick={handleDeleteRecipe}>
+        {' '}<DeleteIcon fontSize="large" title="Borrar" color="disabled" className="delete-icon text-danger"/>
         </IconButton>
         </Tooltip>
         </div>

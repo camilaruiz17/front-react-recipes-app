@@ -24,14 +24,15 @@ const Profile = () => {
   }, []);
 
   return (
-    myrecipesArray &&
+    <div className="details-container">
+       {myrecipesArray &&
     myrecipesArray.map((recipe) => {
       return (
         <Card
           id={recipe.id}
           refreshAction={showmyRecipes}
-          className="editDetails"
-          style={{ width: "25rem" }}
+          className="edit-details"
+          style={{ marginBottom: "30px" }}
         >
           <Card.Img variant="top" src={recipe ? recipe.imgRecipe : "..."} />
           <Card.Body>
@@ -58,7 +59,8 @@ const Profile = () => {
           </Card.Body>
         </Card>
       );
-    })
+    })}
+    </div>
   );
 };
 

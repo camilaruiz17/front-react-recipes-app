@@ -44,3 +44,13 @@ export const getmyRecipe = () => {
   };
   return axios.get(baseUrl + "/myRecipes", config);
 };
+
+export const editRecipe = (id, data) => {
+  console.log(data)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+  return axios.put(baseUrl + "/recipes/" + id, data, config);
+};

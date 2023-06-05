@@ -25,10 +25,10 @@ const UploadWidget = (props) => {
     <>
       <button
         type="button"
-        className="btn btn-custom rounded-4 p-2"
+        className="btn btn-custom rounded-4 text-white"
         onClick={() => widgetRef.current.open()}
       >
-        Sube una foto de tu receta
+        { props.text ? props.text : 'Sube una foto de tu receta'}
       </button>
       {props.added && <span className="d-inline mx-2">☑</span>}
     </>

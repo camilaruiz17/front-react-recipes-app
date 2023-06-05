@@ -9,6 +9,7 @@ import Register from "../views/register/Register";
 import Profile from "../views/profile/Profile";
 import Footer from "../components/footer/Footer";
 import CreateRecipes from "../views/Create-recipes/Create-recipes";
+import EditViews from "../views/edit-recipes/Edit-recipes"
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<CreateRecipes />} />
           <Route path="/recipes/:id" element={<DetailsViews />} />
+          <Route path="/edit/:id" element={<EditViews />} />
         </Routes>
       </div>
       <Footer />
