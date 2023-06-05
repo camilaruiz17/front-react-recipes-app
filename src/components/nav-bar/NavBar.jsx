@@ -57,8 +57,7 @@ const handleLogOut = () => {
             className=" linksmap me-auto my-2 my-lg-0"
             navbarScroll
           >
-            
-           
+
           
           {token ? (
                     <>
