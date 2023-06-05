@@ -1,26 +1,12 @@
 /* Share-button.css */
 .share-button {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px 15px;
-    border-radius: 5px;
+    display:flex;
+    justify-content: flex-end;
+    padding: 5px;
     text-decoration: none;
-    color: white;
   }
   
-  .share-button.facebook {
-    background-color: #3b5998;
-  }
-  
-  .share-button.twitter {
-    background-color: #1da1f2;
-  }
-  
-  .share-button.whatsapp {
-    background-color: #25d366;
-  }
-  
-  .share-button.pinterest {
-    background-color: #bd081c;
-  }
+.title-share{
+  margin-right: 10px;
+}
   
