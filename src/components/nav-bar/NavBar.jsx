@@ -64,7 +64,7 @@ const handleLogOut = () => {
           >
 
           
-          {token ? (
+          {localStorage.getItem("token") ? (
                     <>
                       <Nav.Link eventKey="1">
                         Hola, {name}

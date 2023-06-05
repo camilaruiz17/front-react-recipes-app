@@ -35,6 +35,7 @@ const Register = () => {
                     position: "center",
                 }).then(() => {
                     localStorage.setItem("token", response.data.access_token);
+                    localStorage.setItem("name", data.name);
                     if (isRedirect) {
                     console.log("navegando");
                     navigate(`/${params.redirectTo}`);
