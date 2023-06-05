@@ -2,6 +2,7 @@ import React from "react";
 import "../details-recipes/DetailsRecipes.css";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import ShareButtons from '../../components/share-button/Share-button';
 
 const DetailsRecipes = ({ recipeData }) => {
   return (
@@ -27,6 +28,9 @@ const DetailsRecipes = ({ recipeData }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <b>Pasos de la receta:</b> {recipe ? recipe.instructions : "..."}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <ShareButtons recipe={[recipeData]} />
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>

@@ -6,7 +6,8 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import DeleteRecipe from "../../components/delete-recipe/Delete-recipe";
 import "../profile/Profile.css";
-
+import ShareButtons from '../../components/share-button/Share-button';
+    
 const Profile = () => {
   const [myrecipesArray, setmyRecipes] = useState(null);
 
@@ -55,6 +56,7 @@ const Profile = () => {
                 {recipe ? recipe.instructions : "..."}
               </ListGroup.Item>
               <DeleteRecipe id={recipe.id} refreshAction={showmyRecipes} />
+              <ShareButtons recipe={recipe} />
             </ListGroup>
           </Card.Body>
         </Card>
