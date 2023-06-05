@@ -43,7 +43,7 @@ useEffect(() => {
 
 const handleLogOut = () => {
     localStorage.clear();
-    Swal.fire({title:'Closed',
+    Swal.fire({title:'Has Cerrado sesión',
     text: 'Se ha cerrado la sesión con exito',
     icon: 'success',
     position: 'center'}).then(res => {
