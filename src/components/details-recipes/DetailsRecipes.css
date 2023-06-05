@@ -1,19 +1,6 @@
-.editDetails{
+.recipe-container{
     margin: auto;
     margin-bottom: 10px;
     margin-top: 103px;
-}
-
-@media(max-width: 767px){
-    .editDetails{
-        width: 50%;
-        margin-bottom: 30px;
-    }
-}
-
-@media(max-width: 574px){
-    .editDetails{
-        width: 100%;
-    
-    }
+    max-width: 90%;
 }

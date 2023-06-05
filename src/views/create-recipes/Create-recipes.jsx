@@ -1,20 +1,16 @@
-import { useEffect } from "react"
-import FormRecipes from "../../components/form-recipes/Form-recipes"
-import { useNavigate } from "react-router-dom"
+import { useEffect } from "react";
+import FormRecipes from "../../components/form-recipes/Form-recipes";
+import { useNavigate } from "react-router-dom";
 
-function CreateRecipes(){
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!localStorage.getItem('token')) {
-            navigate('/register/create')
-        }
-    })
-
-    return (
-        <div>
-        <FormRecipes/>
-        </div>
-    )
+const CreateRecipes = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login/create");
     }
-    
-    export default CreateRecipes
+  });
+
+  return <FormRecipes />;
+}
+
+export default CreateRecipes;

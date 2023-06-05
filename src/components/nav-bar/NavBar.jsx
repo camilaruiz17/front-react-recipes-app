@@ -3,24 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import "../nav-bar/NavBar.css"
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 
 function NavBars() {
   const [searchValue, setSearchValue]=useState("");
-  const [results, setResults] = useState(null);
   
   const navigate = useNavigate()
   const [name, setName] = useState(null);
-  const userName = localStorage.getItem('name');
-
+  const [token, setToken] = useState(null)
 
     const handleKeyUp=(event)=>{
     setSearchValue(event.target.value)
@@ -29,14 +25,16 @@ function NavBars() {
   if (searchValue.length > 0) {
       await axios
         navigate('search/'+searchValue)
-    } else {
-      setResults(null);
     }
 };
 
 useEffect(() => {
   // Obtener el nombre del usuario del almacenamiento local
   const storedName = localStorage.getItem('name')
+  const storedToken = localStorage.getItem("token")
+  if (storedToken) {
+    setToken(storedToken)
+  }
   // Actualizar el estado con el nombre del usuario
   setName(storedName);
 }, []);
@@ -64,10 +62,10 @@ const handleLogOut = () => {
             Crear receta</Link></Nav.Link>
             
           
-          {localStorage.getItem("token") ? (
+          {token ? (
                     <>
                       <Nav.Link eventKey="1">
-                        Hola, {userName}
+                        Hola, {name}
                       </Nav.Link>
                       <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">

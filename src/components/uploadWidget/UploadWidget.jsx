@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "../uploadWidget/UploadWidget.css"
+import "../uploadWidget/UploadWidget.css";
 
 const UploadWidget = (props) => {
   const cloudinaryRef = useRef();
@@ -8,20 +8,19 @@ const UploadWidget = (props) => {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
-      cloudName: "dkbwmuo7n",
-      uploadPreset: "dlycori1",
-    }, 
-      
+        cloudName: "dkbwmuo7n", //usar env file
+        uploadPreset: "dlycori1",
+      },
+
       function (error, result) {
-        if (result.event === 'success') {
+        if (result.event === "success") {
           props.getUrlFunction(result.info.secure_url);
           props.onAdd();
         }
-        
       }
-      );
-      },[]);
-  
+    );
+  }, []);
+
   return (
     <>
       <button

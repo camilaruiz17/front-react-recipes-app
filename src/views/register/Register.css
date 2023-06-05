@@ -1,45 +1,9 @@
-@media only screen and (max-width: 600px) {
-    .regisTitle{
-    height: 55px !important;;
-    font-size: 1.5em!important;
-    width: fit-content!important;
-    padding-right: 3vh;
-    }
-
-    #regisForm{
-    padding: 1.5vh!important;
-    }
-
-    #regisCardStyle{
-    padding: 1.5vh!important;
-    }
-
-}
-
-.regisTitle{
-    background-color:#037a21;
-    width: 50%;
-    height: 65px;
-    margin-top: 4vh;
-    color: white;
-    font-size: 1.8em;
-    text-align: left;
-    padding-left: 3vh;
-    padding-top: 1vh;
-    border-radius: 5px;
-}
-
-#regisCardStyle{
+#registerCard{
     font-family: 'Fresca', sans-serif;
-background-color: #f7b103;
+    background-color: #f7b103;
     border: none;
-    padding: 3vh;
-}
-
-#employees-form{
-    background-color: #CFE695;
-    padding: 3vh;
-    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
 }
 
 label {
@@ -85,4 +49,18 @@ label {
     border: none;
     font-size: 1.2em;
     margin-top: 1.2em ;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .form-title{
+        height: 55px !important;;
+        font-size: 1.5em!important;
+        width: fit-content!important;
+        padding-right: 3vh;
+        }
+    
+        #registerCard{
+        padding: 1.5vh!important;
+        }
+    
     }
