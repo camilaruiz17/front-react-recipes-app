@@ -1,28 +1,22 @@
 import { Card, Container, Form, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { useForm, Controller} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import "../register/Register.css";
 import Swal from "sweetalert2";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { registerUser } from "../../services/register.service"
+import { useNavigate, useParams } from "react-router-dom";
+import { registerUser } from "../../services/register.service";
 
-const Register = ({redirectTo}) => {
-    const navigate = useNavigate()
-    const params = useParams()
-
-    const [registerName, setregisterName] = useState(null)
-    const [registerEmail, setregisterEmail] = useState(null);
-    const [password, setpassword] = useState(null);
-    const [confirmPassword, setconfirmPassword] = useState(null);
-    const [redirectUrl, setRedirectUrl] = useState(null)
-
+const Register = () => {
+    const navigate = useNavigate();
+    const params = useParams();
+    const [isRedirect, setIsRedirect] = useState(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onErrors = (e) => { }
+    const onErrors = (e) => { };
 
     const customSubmit = (data) => {
         console.log("data antes de ser transformada", data);
@@ -35,70 +29,77 @@ const Register = ({redirectTo}) => {
             .then((response) => {
                 handleReset();
                 Swal.fire({
-                    title: 'Enviado',
-                    text: 'Se ha registrado con exito',
-                    icon: 'success',
-                    position: 'center',
-                }).then(res => {
-                    localStorage.setItem('token', response.data.access_token)
-                    if (redirectUrl) {
-                        console.log('red', redirectUrl)
-                        navigate(`${redirectUrl}`)
+                    title: "Enviado",
+                    text: "Se ha registrado con exito",
+                    icon: "success",
+                    position: "center",
+                }).then(() => {
+                    localStorage.setItem("token", response.data.access_token);
+                    if (isRedirect) {
+                    console.log("navegando");
+                    navigate(`/${params.redirectTo}`);
                     } else {
-                        navigate('/')
+                    navigate("/");
                     }
-                })
-            }).catch((error) => {
-                console.log(error)
-                const message = error.response.data.replace('{', "").replace('}', "").replace('[', "").replace(']', '')
+                }
+            )
+        }
+    )
+        .catch((error) => {
                 Swal.fire(
-                    '¡Error!',
-                    'Ha ocurrido un error al enviar la petición.</br><smal>' + message + '</small>',
-                    'error'
+                    "¡Error!",
+                    "Ha ocurrido un error al enviar la petición.</br>",
+                    "error"
                 );
             });
 
-        const handleReset = () => {
-            setregisterName(null);
-            setregisterEmail(null);
-            setpassword(null);
-            setconfirmPassword(null);
+        };
+
+useEffect(() => {
+    // validar token
+    if (params.redirectTo) {
+    setIsRedirect(true);
+    }
+}, []);
+
+const handleReset = () => {
             document.getElementById("register-form").reset();
         };
 
-    }
 
-    useEffect(() => {
-        if (redirectTo) {
-            setRedirectUrl(`/${redirectTo}`)
-        } else if (params.redirectTo) {
-            setRedirectUrl(`/${params.redirectTo}`)
-        }
-    }, [redirectTo, params.redirectTo])
+    
 
     return (
-        <div className="profileWrapper">
-            <div>
-                <p className="regisTitle">Registro de Usuario</p>
-            </div>
+        <div className="form-container">
             <Container className="p-5">
-                <Card id="regisCardStyle" className="text-start">
-                    <Card.Title id="regisTittle" className="text-center"></Card.Title>
+                <Card id="registerCard" className="text-start">
+                    <Card.Title className="text-center text-white">
+                        <h2>Registro de Usuario</h2>
+                    </Card.Title>
                     <Card.Body>
-                        <Form id="register-form" onSubmit={handleSubmit(customSubmit, onErrors)}>
+                        <Form
+                            id="register-form"
+                            onSubmit={handleSubmit(customSubmit, onErrors)}
+                        >
                             <Form.Group className="mb-3" controlId="employeeName">
                                 <Form.Label>Nombre</Form.Label>
                                 <input
                                     type="text"
                                     placeholder="Escribe tu Nombre"
-                                    className={errors.name ? 'form-control shadow fail' : 'form-control shadow'}
+                                    className={
+                                        errors.name
+                                            ? "form-control shadow fail"
+                                            : "form-control shadow"
+                                    }
                                     {...register("name", {
                                         required: true,
                                         maxLength: 30,
                                     })}
                                 />
                                 {errors.name?.type === "required" && (
-                                    <small className="fail">Este campo no puede estar vacío</small>
+                                    <small className="fail">
+                                        Este campo no puede estar vacío
+                                    </small>
                                 )}
                                 {errors.name?.type === "maxLength" && (
                                     <small className="fail">Corrija el campo</small>
@@ -107,29 +108,38 @@ const Register = ({redirectTo}) => {
                             <Form.Group className="mb-3" controlId="registerEmail">
                                 <Form.Label>Email</Form.Label>
                                 <input
-                                type="text"
-                                placeholder="Escribe tu correo electrónico "
-                                    className={errors.name ? 'form-control shadow fail' : 'form-control shadow'}
-                                    {...register("email", { 
-                                        required: true, 
+                                    type="text"
+                                    placeholder="Escribe tu correo electrónico "
+                                    className={
+                                        errors.name
+                                            ? "form-control shadow fail"
+                                            : "form-control shadow"
+                                    }
+                                    {...register("email", {
+                                        required: true,
                                         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                                     })}
-                                    />
-                                    
+                                />
+
                                 {errors.email && <p role="alert">{errors.email?.message}</p>}
                                 {errors.email?.type === "pattern" && (
-                                <small className="fail">
-                                {" "}
-                                Mail can only contain letters, numbers, periods, hyphens, and
-                            underscores
-                                </small>
-                                )}</Form.Group>
+                                    <small className="fail">
+                                        {" "}
+                                        El correo solo puede contener letras, números, puntos,
+                                        guiones, y guiones bajos
+                                    </small>
+                                )}
+                            </Form.Group>
                             <Form.Group className="mb-3" controlId="password">
                                 <Form.Label>Contraseña</Form.Label>
                                 <input
                                     type="password"
                                     placeholder="Escribe una contraseña"
-                                    className={errors.password ? 'form-control shadow fail' : 'form-control shadow'}
+                                    className={
+                                        errors.password
+                                            ? "form-control shadow fail"
+                                            : "form-control shadow"
+                                    }
                                     {...register("password", {
                                         required: true,
                                         minLength: 4,
@@ -137,10 +147,14 @@ const Register = ({redirectTo}) => {
                                     })}
                                 />
                                 {errors.password?.type === "required" && (
-                                    <small className="fail">Este campo no puede estar vacío</small>
+                                    <small className="fail">
+                                        Este campo no puede estar vacío
+                                    </small>
                                 )}
                                 {errors.password?.type === "maxLength" && (
-                                    <small className="fail">El número máximo de caracteres es ocho</small>
+                                    <small className="fail">
+                                        El número máximo de caracteres es ocho
+                                    </small>
                                 )}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="confirmPassword">
@@ -148,7 +162,11 @@ const Register = ({redirectTo}) => {
                                 <input
                                     type="password"
                                     placeholder="Introduce de nuevo la contraseña"
-                                    className={errors.password2 ? 'form-control shadow fail' : 'form-control shadow'}
+                                    className={
+                                        errors.password2
+                                            ? "form-control shadow fail"
+                                            : "form-control shadow"
+                                    }
                                     {...register("password2", {
                                         required: true,
                                         minLength: 4,
@@ -156,24 +174,27 @@ const Register = ({redirectTo}) => {
                                     })}
                                 />
                                 {errors.password2?.type === "required" && (
-                                    <small className="fail">Este campo no puede estar vacío</small>
+                                    <small className="fail">
+                                        Este campo no puede estar vacío
+                                    </small>
                                 )}
                                 {errors.password2?.type === "maxLength" && (
-                                    <small className="fail">El número máximo de caracteres es ocho</small>
+                                    <small className="fail">
+                                        El número máximo de caracteres es ocho
+                                    </small>
                                 )}
                             </Form.Group>
-                            <Link to={`/login${redirectUrl}`}>ya tienes una cuenta?</Link>
+
                             <div id="btnContainer">
                                 <Button id="createBtn" variant="primary" type="submit">
                                     Enviar
                                 </Button>
                             </div>
-                            
                         </Form>
                     </Card.Body>
                 </Card>
             </Container>
         </div>
-    )
+    );
 };
-    export default Register
+export default Register;

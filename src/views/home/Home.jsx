@@ -1,15 +1,12 @@
+import CardRecipes from "../../components/card-recipes/Card-recipes";
+import "../home/Home.css";
 
-import CardRecipe from "../../components/Card-recipes/Card-recipes";
-import "../home/Home.css"
+const Home = () => {
+  return (
+    <div className="home-container">
+      <CardRecipes />
+    </div>
+  );
+}
 
-
-function Home(){
-
-    return (
-        <div className="homeStyle">
-        <CardRecipe/>
-        </div>
-    )
-    }
-    
-    export default Home
+export default Home;

@@ -3,45 +3,44 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const getToken = () => {
-    return localStorage.getItem("token");
-}
+  return localStorage.getItem("token");
+};
 
 export const postRecipe = (data) => {
-    const config = {
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-            },
-        };
-    return axios.post(baseUrl + "/recipes", data, config);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+  return axios.post(baseUrl + "/recipes", data, config);
 };
 
 export const getRecipe = (data) => {
-    return axios.get(baseUrl + "/recipes", data);
+  return axios.get(baseUrl + "/recipes", data);
 };
 
 export const getRecipeById = (id) => {
-    return axios.get(baseUrl + "/recipes/" + id);
-}
+  return axios.get(baseUrl + "/recipes/" + id);
+};
 
 export const getRecipeByTitle = (title) => {
-    return axios.get(baseUrl + "/recipes/search/" + title);
-}
+  return axios.get(baseUrl + "/recipes/search/" + title);
+};
 
 export const deleteRecipe = (id) => {
-    const token = localStorage.getItem("token");
-    const config = {
+  const config = {
     headers: {
-        Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${getToken()}`,
     },
-    }
-    return axios.delete(baseUrl + '/recipes/' + id, config)
-}
+  };
+  return axios.delete(baseUrl + "/recipes/" + id, config);
+};
 
 export const getmyRecipe = () => {
-    const config = {
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-            },
-        };
-    return axios.get(baseUrl + "/myRecipes", config);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+  return axios.get(baseUrl + "/myRecipes", config);
 };
