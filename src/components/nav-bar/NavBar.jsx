@@ -37,7 +37,9 @@ useEffect(() => {
   }
   // Actualizar el estado con el nombre del usuario
   setName(storedName);
-}, []);
+
+  //history.state ejecuta este bloque cada vez que cambia la url
+}, [history.state]);
 
 const handleLogOut = () => {
     localStorage.clear();
@@ -45,7 +47,10 @@ const handleLogOut = () => {
     text: 'Se ha cerrado la sesión con exito',
     icon: 'success',
     position: 'center'}).then(res => {
-      setTimeout(3000, navigate('/'))});
+      setTimeout(3000, navigate('/'))
+      setName(null)
+      setToken(null)
+    });
 };
     return (
     <Navbar collapseOnSelect={true} className= "customnav" bg="light" expand="lg" fixed="top" data-bs-toggle="collapse">
@@ -92,7 +97,7 @@ const handleLogOut = () => {
                     </Nav.Link>
                     </>
                     )
-                   
+                  
                   }
           </Nav>
           <Form className="d-flex">

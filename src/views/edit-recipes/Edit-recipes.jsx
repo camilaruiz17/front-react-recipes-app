@@ -45,7 +45,7 @@ const EditViews = () => {
           setTimeout(3000, navigate("/profile"));
         });
       })
-      .catch(() => {
+      .catch((e) => {
         Swal.fire(
           "¡Error!",
           "Ha ocurrido un error al enviar la petición.</br>",
@@ -206,7 +206,7 @@ const EditViews = () => {
                 {...register("instructions", {
                   required: true,
                   minLength: 5,
-                  maxLength: 1000,
+                  maxLength: 2000,
                 })}
               />
               {errors.instruction?.type === "required" && (
@@ -214,7 +214,7 @@ const EditViews = () => {
               )}
               {errors.instruction?.type === "maxLength" && (
                 <small className="fail">
-                  El número máximo de caracteres es 300
+                  El número máximo de caracteres es 2000
                 </small>
               )}
             </Form.Group>

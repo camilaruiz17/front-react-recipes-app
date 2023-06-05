@@ -180,7 +180,7 @@ const FormRecipes = () => {
                 {...register("instructions", {
                   required: true,
                   minLength: 5,
-                  maxLength: 300,
+                  maxLength: 2000,
                 })}
               />
               {errors.instruction?.type === "required" && (

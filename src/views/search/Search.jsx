@@ -24,7 +24,7 @@ function Search(){
 
     return (
         <div>
-            <RecipeDetails recipeData={recipesData} />
+            <RecipeDetails className="searchForm" recipeData={recipesData} />
         </div>
     )
     }
