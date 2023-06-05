@@ -58,9 +58,7 @@ const handleLogOut = () => {
             navbarScroll
           >
             
-            <Nav.Link eventKey="2"><Link to={'/create'}>
-            Crear receta</Link></Nav.Link>
-            
+           
           
           {token ? (
                     <>
@@ -72,6 +70,9 @@ const handleLogOut = () => {
                         <Link to={'/profile'}>Mis recetas</Link>
                       </Nav.Link>
 
+                      <Nav.Link eventKey="2"><Link to={'/create'}>
+                        Crear receta</Link></Nav.Link>
+
                       <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
@@ -80,6 +81,10 @@ const handleLogOut = () => {
                       </>
                   ) : (
                     <>
+
+                  <Nav.Link eventKey="2"><Link to={'/create'}>
+                      Crear receta</Link></Nav.Link>
+
                     <Nav.Link className="loginCustom" eventKey="5">
                       <Link to={'/login'}>Login</Link>
                     </Nav.Link>
