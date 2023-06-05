@@ -67,6 +67,11 @@ const handleLogOut = () => {
                       <Nav.Link eventKey="1">
                         Hola, {name}
                       </Nav.Link>
+
+                      <Nav.Link className="MyRecipes" eventKey="2">
+                        <Link to={'/profile'}>Mis recetas</Link>
+                      </Nav.Link>
+
                       <Nav.Link eventKey="3">
                       <Link onClick={handleLogOut} className="link_brand danger">
                         Logout
