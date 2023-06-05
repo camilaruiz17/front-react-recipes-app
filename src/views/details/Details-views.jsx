@@ -4,6 +4,7 @@ import { getRecipeById } from "../../services/recipes.service";
 import DetailsRecipes from "../../components/details-recipes/DetailsRecipes";
 import "./Details-views.css"
 
+
 const DetailsViews = () => {
   const { id } = useParams();
   const [recipeData, setRecipeData] = useState(null);
